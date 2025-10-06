@@ -40,12 +40,12 @@ def main () -> None:
     with Pool(max_workers=5) as executor:
         results = list(executor.map(count_median, path_to_file))
     
-    for elements in results:
-        print(elements, "\n")
+    #for elements in results:
+    #    print(elements, "\n")
 
     a = pd.concat(results, ignore_index=True)
     a = a.groupby("Категория")["Медиана"].apply(list).reset_index()
-    print(a, "\n")
+    #print(a, "\n")
     a["Медиана медиан"] = a["Медиана"].apply(lambda x : pd.Series(x).median())   
     a["Стандартное отклонение"] = a["Медиана"].apply(lambda x : pd.Series(x).std())   
     print(a)
